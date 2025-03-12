@@ -1,0 +1,19 @@
+name: GitHub Container Registry
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: HomeNexus/actions/ghcr@main
+        with:
+          password: ${{ secrets.GITHUB_TOKEN }}
